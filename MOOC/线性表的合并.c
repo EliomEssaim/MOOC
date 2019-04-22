@@ -48,6 +48,9 @@ List Merge(List L1, List L2)
 {
 	List L = (List)malloc(sizeof(struct Node));
 	List last = (List)malloc(sizeof(struct Node));
+	List origin_L1, origin_L2;
+	origin_L1 = L1;
+	origin_L2 = L2;
 	L->Next = NULL;
 	last = L;
 	L1 = L1->Next;
@@ -86,7 +89,9 @@ List Merge(List L1, List L2)
 		}
 	}
 	last->Next = NULL;
-	
+
+	origin_L1->Next = NULL;
+	origin_L2->Next = NULL;
 	return L;
 }
 void Print(List L)
