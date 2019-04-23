@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="线性结构——一元多项式乘法与加法运算.c">
+    <ClCompile Include="ReversLinkedList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
