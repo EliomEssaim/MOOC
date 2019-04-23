@@ -12,7 +12,6 @@ struct Node {
 int main()
 {
 	int RevScale, num,First,add,tmp,i=0;
-	struct Node *p;
 	int List_add[MAXSIZE];
 	scanf("%d %d % d", &First, &num, &RevScale);
 
@@ -20,7 +19,7 @@ int main()
 	{
 		scanf("%d %d %d", &add, &node[add].Data, &node[add].Next);
 	}
-	p = node;
+
 	tmp = First;
 	while (node[tmp].Next != -1)
 	{
