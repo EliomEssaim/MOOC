@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dalao.cpp" />
     <ClCompile Include="ReversLinkedList.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
