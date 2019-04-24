@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ReversLinkedList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="dalao.cpp">
+    <ClCompile Include="PopSequence.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
