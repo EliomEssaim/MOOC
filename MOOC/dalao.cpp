@@ -41,4 +41,6 @@ int main()
 		printf("%05d %d %05d\n", List[i], node[List[i]].data, List[i + 1]);
 	printf("%05d %d -1\n", List[i], node[List[i]].data);
 	return 0;
+
 }
+//ÉèÖÃlinux¶ËµÄÎŞÃÜÂëpush²âÊÔ
