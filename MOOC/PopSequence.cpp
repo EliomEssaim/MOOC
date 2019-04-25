@@ -45,22 +45,30 @@ bool Rule1(int *List)
 }
 bool Rule2(int *List)
 {
-	bool flag=1;
+	bool *inside = (bool *)malloc(sizeof(bool)*NumPush);
 	int LogicLast;
 	
 	
 	for (int i = 0; i < NumPush - 1; i++)
 	{
+		memset(inside, 1, NumPush);
+
 		LogicLast = List[i] - 1;
 		for (int j = i-1; j >= 0; j--)
 		{
-			if (List[j] == LogicLast)
+			if (List[j] <= LogicLast)
 			{
-				LogicLast--;
-				j = i;
+				inside[List[j]] = 0;
 			}
 		}
-
+		for(int j= List[i] - 1;j>=0;j--)
+		{
+			if (inside[j])
+			{
+				LogicLast = j;
+				break;
+			}
+		}
 		
 		
 		if (List[i] > List[i+1] && List[i+1] != LogicLast)
