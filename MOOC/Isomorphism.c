@@ -88,4 +88,4 @@ bool Isomorphic(ElementType R1, ElementType R2)
 
 
 }
-//忽略了空树
+//忽略了空树 理解了其实就是节点不等于数值 数值才是比较的关键 这个程序的节点就是另一类的地址 比较两个树的地址毫无意义
