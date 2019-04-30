@@ -18,5 +18,8 @@
     <ClCompile Include="Isomorphism.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ListLeaves.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
