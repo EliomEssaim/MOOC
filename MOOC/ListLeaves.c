@@ -4,26 +4,22 @@
 #include "malloc.h"
 #include "string.h"
 #define MaxTree 10
-#define ElementType char
+#define ElementType int 
 #define Tree int
 #define Null -1
-struct TreeNode {
+typedef struct TreeNode {
 	ElementType Data;
 	Tree Left;
 	Tree Right;
-}T1[MaxTree];
-struct Queue {
-	struct TreeNode Data[MaxTree];
-	int head, rear;
-	int size ;
-	int usage;
-}Q;
-
-void InitQ(void);
-int EnterQ(struct TreeNode Node);
-struct TreeNode*DepartQ(void);
+}TNode;
+TNode T1[MaxTree];
+TNode Queue[MaxTree];
+int first = -1, last = -1;
+void Push(TNode tn);
+TNode Pop();
+void LevelScan(int root);
 Tree BuildTree(struct TreeNode *T);
-bool LevelScan(Tree R);
+int n;
 int main()
 {
 	int R1;
@@ -38,9 +34,11 @@ Tree BuildTree(struct TreeNode *T)
 	scanf("%d", &NumNode);
 	bool *inside = (bool*)malloc(sizeof(bool)*NumNode);
 	memset(inside, 1, NumNode);
+	n = NumNode;
 	for (int i = 0; i < NumNode; i++)
 	{
-		scanf("\n%c %c %c", &T[i].Data, &cl, &cr);//回车放前面吃掉回车
+		T[i].Data = i;
+		scanf("\n%c %c", &cl, &cr);//回车放前面吃掉回车
 		if (cl != '-')
 		{
 			T[i].Left = cl - '0';
@@ -67,39 +65,33 @@ Tree BuildTree(struct TreeNode *T)
 
 	return root;
 }
-void InitQ(void)
-{
-	Q.size = MaxTree;
-	Q.usage = 0;
-	Q.head = 0;
-	Q.rear = 0;
- 
-}
-int EnterQ(struct TreeNode Node)
-{
-	if (++Q.usage > Q.size)
-	{
-		--Q.usage;
-		return 0;
-	}
-	Q.Data[Q.head%Q.size] = Node;//实现循环
-	Q.head = (Q.head + 1) % Q.size;
-	return 1;
 
-}
-struct TreeNode*DepartQ(void)
+void Push(TNode treeNode)
 {
-	if (--Q.usage <= 0)
+	Queue[++last] = treeNode;
+}
+
+TNode Pop()
+{
+	return Queue[++first];
+}
+void LevelScan(int root)
+{
+	int leaves[MaxTree];
+	int k = 0;
+	Push(T1[root]);
+	for (int i = 0; i < n; i++)
 	{
-		Q.usage++;
-		return (struct TreeNode*)0;
+		TNode tn = Pop();
+		//左孩子和右孩子都不存在时，将叶节点的值保存到数组中，便于格式化打印
+		if (tn.Left == -1 && tn.Right == -1)
+			leaves[k++] = tn.Data;
+		if (tn.Left != -1)
+			Push(T1[tn.Left]);
+		if (tn.Right != -1)
+			Push(T1[tn.Right]);
 	}
-	if (++Q.rear > Q.size)
-		return &Q.Data[(Q.rear - 1) % Q.size];
-	else
-		return &Q.Data[Q.rear - 1];
-}
-bool LevelScan(Tree R)
-{
-	EnterQ(T1[R]);
+	for (int i = 0; i < k - 1; i++)
+		printf("%d ", leaves[i]);
+	printf("%d\n", leaves[k - 1]);
 }
