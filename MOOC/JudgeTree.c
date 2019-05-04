@@ -12,12 +12,36 @@ struct TreeNode {
 };
 Tree NewNode(int val)
 {
+	Tree t;
+	t = (Tree)malloc(sizeof(struct TreeNode));
+	t->left = NULL;
+	t->right = NULL;
+	t->flag = 0;
 
+	return t;
+}
+Tree Insert(Tree t, int data)//insert不熟悉：不够理解递归流程和思想
+{
+	if (t == NULL)
+	{
+		t = NewNode(data);
+	}
+	else
+	{
+		if (t->node > data)
+			t->left = Insert(t->left, data);
+		else 
+			t->right = Insert(t->right, data);//如果相等也进入这个程序？？？？
+
+	}
+		
+	return t;
 }
 Tree MakeTree(int n)
 {
-	Tree t,val;
-	t = (Tree)malloc(sizeof(struct TreeNode));//根节点不一致第一个要先拿出来 //反思1: 
+	Tree t;
+	int val;
+	//根节点不一致第一个要先拿出来 //反思1: 初始化不在这里
 	scanf("%d", &val);
 	t = NewNode(val);
 	for (int i = 1; i < n; i++)
@@ -26,6 +50,14 @@ Tree MakeTree(int n)
 		t = Insert(t, val);
 	}
 	return t;
+}
+int Check(Tree t, int data)
+{
+	if (!t->flag)
+	{
+		t->flag = 1;
+
+	}
 }
 int main()
 {
@@ -66,4 +98,6 @@ int main()
 需要作出什么？
 第一步？-》卡在这里-》对于当前场景的建树没有思路：-》没有建树的基本思路（模板）：无根之浮萍自然无处思考  可以不通过模板想出来吗？（2）-》 一定要独立手码一下结构
 （2）：简单的可以不假思考的写出来 复杂的不行= = 。对我来说目前简单的就是小小的逻辑判断
+
+搞不清楚这个函数要做什么这个函数存在的意义
 */
