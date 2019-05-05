@@ -46,18 +46,63 @@ Tree MakeTree(int n)
 	t = NewNode(val);
 	for (int i = 1; i < n; i++)
 	{
-		scanf("%d", val);
+		scanf("%d",&val);
 		t = Insert(t, val);
 	}
 	return t;
 }
 int Check(Tree t, int data)
 {
-	if (!t->flag)
+	if (t->flag)
 	{
-		t->flag = 1;
-
+		if (data > t->node)
+			return Check(t->right, data);
+		else if (data < t->node)
+			return Check(t->left, data);
+		else
+			return 0;
 	}
+	else
+	{
+		if (data == t->node)
+		{
+			t->flag = 1;
+			return 1;
+		}
+		else
+			return 0;
+	}
+}
+int Judge(Tree t, int N)
+{
+	int i, flag = 0,val;
+	
+	scanf("%d", &val);
+	if (t->node != val)
+		flag = 1;
+	else
+		t->flag = 1;
+	for (i = 1; i < N; i++)
+	{
+		scanf("%d", &val);
+		if(!flag&&(!Check(t,val))) flag=1; 
+	}
+	if (flag) return 0;
+	else return 1;
+}
+void ResetT(Tree T)
+{
+	if (T->left) ResetT(T->left);
+	else if (T->right) ResetT(T->right);
+	else
+		T->flag = 0;
+}
+void FreeTree(Tree T)
+{
+	if (T->left) ResetT(T->left);
+	else if (T->right) ResetT(T->right);
+	else
+		free(T);
 }
 int main()
 {
@@ -71,13 +116,13 @@ int main()
 		
 		for (int i = 0; i < L; i++)
 		{
-			if (Judge())
+			if (Judge(T,N))
 				printf("Yes\n");
 			else
 				printf("No\n");
-			ResetFlag();
+			ResetT(T);
 		}
-		FreeTree();//想不到= =，因为不限制次数所以每一轮判断后要清除数据
+		FreeTree(T);//想不到= =，因为不限制次数所以每一轮判断后要清除数据
 		scanf("%d", &N);
 	}
 
